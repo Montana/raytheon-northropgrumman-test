@@ -7,8 +7,5 @@ before_install:
   - docker version
   - docker-compose version
 
-before_script:
-  - docker-compose -f local.yml build
-
 script:
   - docker-compose -f local.yml run --rm $(bash <(curl -s https://codecov.io/env)) django ash -c 'pytest --cov=./ && apk update && apk add git && codecov'
