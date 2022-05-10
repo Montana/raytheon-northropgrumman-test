@@ -1,8 +1,14 @@
-sudo: required
-
-services: 
-  - docker
-
-before_install:
-  - docker version
-  - docker-compose version
+jobs:
+  include:
+    - language: objective-c
+      osx_image: xcode13.1
+      sudo: false
+      install: skip
+      script:
+        - xcrun instruments -s devices
+        - echo staring build and test...
+        - xcrun simctl list devices
+    - language: ruby
+      rvm: 2.7.5
+      install: skip
+      script: ruby -v
